@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Azundo Design]]></title>
+  <link href="http://azundo.github.io/atom.xml" rel="self"/>
+  <link href="http://azundo.github.io/"/>
+  <updated>2013-06-12T12:17:29-04:00</updated>
+  <id>http://azundo.github.io/</id>
+  <author>
+    <name><![CDATA[Ben Best]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Introducing the Azundo Blog]]></title>
+    <link href="http://azundo.github.io/blog/introducing-the-azundo-blog/"/>
+    <updated>2013-06-12T12:05:00-04:00</updated>
+    <id>http://azundo.github.io/blog/introducing-the-azundo-blog</id>
+    <content type="html"><![CDATA[<p>A new day and a new blog. As I transition from my past role as a Market
+Development Specialist with Engineers Without Borders Canada toward a more
+technically focused time, I thought it might be useful to start a more
+technical blog. At one point I had intended to write about technical things
+over at <a href="http://theborrowedbicycle.ca">http://theborrowedbicycle.ca</a> but I&rsquo;ll keep that for thoughts on
+personal and human development instead of design and engineering.</p>
+
+<p>The intention of this blog is to keep track of what I&rsquo;m learning and thinking
+about as I get my coding chops back to re-enter the technical world.  Right now
+my goal is to simply use this blog to record my progress and learnings for
+myself and to continue to work on my writing skills and technical
+communication.  I&rsquo;ve got a few projects that I hope to blog about as I work on
+them over the summer, aiming to land a job as a software engineer starting in
+September.</p>
+]]></content>
+  </entry>
+  
+</feed>
