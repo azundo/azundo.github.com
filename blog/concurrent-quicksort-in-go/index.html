@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Azundo Design</title>
+  <title>Concurrent quicksort in Go - Azundo Design</title>
   <meta name="author" content="Ben Best">
 
   
@@ -19,7 +19,7 @@ language before applying for applying jobs. I&rsquo;ve never &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://azundo.github.io">
+  <link rel="canonical" href="http://azundo.github.io/blog/concurrent-quicksort-in-go">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Azundo Design" type="application/atom+xml">
@@ -65,15 +65,12 @@ language before applying for applying jobs. I&rsquo;ve never &hellip;">
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/concurrent-quicksort-in-go/">Concurrent Quicksort in Go</a></h1>
+      <h1 class="entry-title">Concurrent Quicksort in Go</h1>
     
     
       <p class="meta">
@@ -96,7 +93,7 @@ language before applying for applying jobs. I&rsquo;ve never &hellip;">
   </header>
 
 
-  <div class="entry-content"><p>I&rsquo;ve been playing around with Go to get some experience in a systems programming
+<div class="entry-content"><p>I&rsquo;ve been playing around with Go to get some experience in a systems programming
 language before applying for applying jobs. I&rsquo;ve never done concurrent/parallel
 programming so I thought I&rsquo;d try to learn about some of Go&rsquo;s concurrency tools
 by implementing quicksort concurrently.</p>
@@ -316,22 +313,16 @@ it was a good experiment in writing concurrent Go that also forced me to dive
 into profiling with pprof and using Go&rsquo;s support for writing benchmarks in test
 code.</p>
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/introducing-the-azundo-blog/">Introducing the Azundo Blog</a></h1>
-    
-    
-      <p class="meta">
-        
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Ben Best</span></span>
+
+      
 
 
 
@@ -343,40 +334,32 @@ code.</p>
   
 
 
-<time datetime="2013-06-12T12:05:00-04:00" pubdate data-updated="true">Jun 12<span>th</span>, 2013</time>
-        
-      </p>
+<time datetime="2013-06-23T22:05:00-04:00" pubdate data-updated="true">Jun 23<span>rd</span>, 2013</time>
+      
+
+
+    </p>
     
-  </header>
-
-
-  <div class="entry-content"><p>A new day and a new blog. As I transition from my past role as a Market
-Development Specialist with Engineers Without Borders Canada toward a more
-technically focused time, I thought it might be useful to start a more
-technical blog. At one point I had intended to write about technical things
-over at <a href="http://theborrowedbicycle.ca">http://theborrowedbicycle.ca</a> but I&rsquo;ll keep that for thoughts on
-personal and human development instead of design and engineering.</p>
-
-<p>The intention of this blog is to keep track of what I&rsquo;m learning and thinking
-about as I get my coding chops back to re-enter the technical world.  Right now
-my goal is to simply use this blog to record my progress and learnings for
-myself and to continue to work on my writing skills and technical
-communication.  I&rsquo;ve got a few projects that I hope to blog about as I work on
-them over the summer, aiming to land a job as a software engineer starting in
-September.</p>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://azundo.github.io/blog/concurrent-quicksort-in-go/" data-via="" data-counturl="http://azundo.github.io/blog/concurrent-quicksort-in-go/" >Tweet</a>
+  
+  
+  
 </div>
-  
-  
 
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/introducing-the-azundo-blog/" title="Previous Post: Introducing the Azundo Blog">&laquo; Introducing the Azundo Blog</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
 </div>
+
 <aside class="sidebar">
   
     <section>
@@ -397,7 +380,7 @@ September.</p>
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/azundo">@azundo</a> on GitHub
@@ -429,6 +412,7 @@ September.</p>
 
   
 </aside>
+
 
     </div>
   </div>
