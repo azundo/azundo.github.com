@@ -3,7 +3,7 @@ layout: post
 title: "Concurrent quicksort in Go"
 date: 2013-06-23 22:05
 comments: true
-categories: 
+categories: [go, concurrency]
 ---
 I've been playing around with Go to get some experience in a systems programming
 language before applying for applying jobs. I've never done concurrent/parallel
@@ -123,7 +123,7 @@ switching to a synchronous model once the workers channel is exhausted.
 
 This performs much better than before. Benchmarking puts it at about the same
 speed as the built-in sort.Ints, but still slower than our basic Qsort
-implementation for a shuffled slice of 10 million elements created by
+implementation for a shuffled slice of 1 million elements created by
 math/rand.Perm. Playing around with MAXGOROUTINES I seemed to get slight
 variations when using numbers anywhere from 2 to 10000 (make sure you have the
 GOMAXPROCS environment variable set to the number of cores you want to use
