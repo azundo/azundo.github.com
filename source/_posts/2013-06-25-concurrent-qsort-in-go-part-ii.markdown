@@ -6,8 +6,10 @@ comments: true
 categories: [go, concurrency]
 ---
 
-After my past attempt at writing a concurrent Qsort algorithm I had a few more
-thoughts about how to change the architecture.
+After my [past
+attempt](https://azundo.github.io/blog/concurrent-quicksort-in-go) at writing a
+concurrent Qsort algorithm I had a few more thoughts about how to change the
+architecture.
 
 Instead of creating new channels to pass to every recursively-called goroutine
 and then blocking on them until they return, I wanted to create only a single
@@ -87,5 +89,5 @@ slow down.  I'm hoping to get my hands on a computer with 4 cores to see if the
 concurrent version will see a speedup when doubling the core count again, or if
 communication overhead is still too high.
 
-Again, all of the code and some benchmarking is in
-[https://github.com/azundo/cqsort.git].
+Again, all of the code and some benchmarking is in a github repository at
+(https://github.com/azundo/cqsort.git).

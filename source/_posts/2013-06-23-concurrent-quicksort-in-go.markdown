@@ -140,3 +140,5 @@ statements and branches are enough to slow things down considerably. In any case
 it was a good experiment in writing concurrent Go that also forced me to dive
 into profiling with pprof and using Go's support for writing benchmarks in test
 code.
+
+Code is all up on github at (https://github.com/azundo/cqsort).
