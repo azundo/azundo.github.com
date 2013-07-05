@@ -6,8 +6,7 @@ comments: true
 categories: [go, concurrency]
 ---
 
-After my [past
-attempt](https://azundo.github.io/blog/concurrent-quicksort-in-go) at writing a
+After my [past attempt](https://azundo.github.io/blog/concurrent-quicksort-in-go) at writing a
 concurrent Qsort algorithm I had a few more thoughts about how to change the
 architecture.
 
@@ -90,4 +89,4 @@ concurrent version will see a speedup when doubling the core count again, or if
 communication overhead is still too high.
 
 Again, all of the code and some benchmarking is in a github repository at
-(https://github.com/azundo/cqsort.git).
+[https://github.com/azundo/cqsort.git](https://github.com/azundo/cqsort.git).
