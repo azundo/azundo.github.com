@@ -3,7 +3,6 @@ layout: post
 title: "Using D3.js to Brute Force the Pirate Puzzle"
 date: 2013-07-04 23:10
 comments: true
-published: false
 categories: ["d3.js", "puzzles", "geometry"]
 ---
 
