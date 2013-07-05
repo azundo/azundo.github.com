@@ -9,9 +9,9 @@
   <meta name="author" content="Ben Best">
 
   
-  <meta name="description" content="Blog Archive 2013 Concurrent quicksort in Go
-Jun 23 2013 Introducing the Azundo Blog
-Jun 12 2013 Recent Posts Concurrent Quicksort in Go Introducing &hellip;">
+  <meta name="description" content="Blog Archive 2013 Concurrent Qsort in Go - Part II
+Jun 25 2013 posted in concurrency, go Concurrent quicksort in Go
+Jun 23 2013 posted in &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -32,8 +32,35 @@ Jun 12 2013 Recent Posts Concurrent Quicksort in Go Introducing &hellip;">
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href='http://fonts.googleapis.com/css?family=Montserrat+Alternates:700' rel='stylesheet' type='text/css'>
+<!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX", "output/SVG"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
 
   
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-42182074-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
 
 </head>
 
@@ -83,8 +110,26 @@ Jun 12 2013 Recent Posts Concurrent Quicksort in Go Introducing &hellip;">
 
 <article>
   
+<h1><a href="/blog/concurrent-qsort-in-go-part-ii/">Concurrent Qsort in Go - Part II</a></h1>
+<time datetime="2013-06-25T13:46:00-04:00" pubdate><span class='month'>Jun</span> <span class='day'>25</span> <span class='year'>2013</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/concurrency/'>concurrency</a>, <a class='category' href='/blog/categories/go/'>go</a></span>
+</footer>
+
+
+</article>
+
+
+
+<article>
+  
 <h1><a href="/blog/concurrent-quicksort-in-go/">Concurrent quicksort in Go</a></h1>
 <time datetime="2013-06-23T22:05:00-04:00" pubdate><span class='month'>Jun</span> <span class='day'>23</span> <span class='year'>2013</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/concurrency/'>concurrency</a>, <a class='category' href='/blog/categories/go/'>go</a></span>
+</footer>
 
 
 </article>
@@ -111,6 +156,10 @@ Jun 12 2013 Recent Posts Concurrent Quicksort in Go Introducing &hellip;">
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/concurrent-qsort-in-go-part-ii/">Concurrent Qsort in Go - Part II</a>
+      </li>
     
       <li class="post">
         <a href="/blog/concurrent-quicksort-in-go/">Concurrent Quicksort in Go</a>

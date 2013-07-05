@@ -9,8 +9,8 @@
   <meta name="author" content="Ben Best">
 
   
-  <meta name="description" content="I&rsquo;ve been playing around with Go to get some experience in a systems programming
-language before applying for applying jobs. I&rsquo;ve never &hellip;">
+  <meta name="description" content="I’ve been playing around with Go to get some experience in a systems programming
+language before applying for applying jobs. I’ve never done &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -31,8 +31,35 @@ language before applying for applying jobs. I&rsquo;ve never &hellip;">
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href='http://fonts.googleapis.com/css?family=Montserrat+Alternates:700' rel='stylesheet' type='text/css'>
+<!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX", "output/SVG"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
 
   
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-42182074-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
 
 </head>
 
@@ -93,9 +120,9 @@ language before applying for applying jobs. I&rsquo;ve never &hellip;">
   </header>
 
 
-<div class="entry-content"><p>I&rsquo;ve been playing around with Go to get some experience in a systems programming
-language before applying for applying jobs. I&rsquo;ve never done concurrent/parallel
-programming so I thought I&rsquo;d try to learn about some of Go&rsquo;s concurrency tools
+<div class="entry-content"><p>I’ve been playing around with Go to get some experience in a systems programming
+language before applying for applying jobs. I’ve never done concurrent/parallel
+programming so I thought I’d try to learn about some of Go’s concurrency tools
 by implementing quicksort concurrently.</p>
 
 <p>I started by writing a simple in-place quicksort implementation. The majority of
@@ -103,91 +130,89 @@ the algorithm happens in a <code>partition</code> function which picks a random 
 then does in-place swapping to partition around the pivot. With this in place
 the sequential algorithm falls into place easily.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='go'><span class='line'><span class="kd">func</span> <span class="nx">Qsort</span><span class="p">(</span><span class="nx">s</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="p">{</span>
-</span><span class='line'>        <span class="k">return</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="nx">pivotIdx</span> <span class="o">:=</span> <span class="nx">partition</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
-</span><span class='line'>    <span class="nx">Qsort</span><span class="p">(</span><span class="nx">s</span><span class="p">[:</span><span class="nx">pivotIdx</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
-</span><span class='line'>    <span class="nx">Qsort</span><span class="p">(</span><span class="nx">s</span><span class="p">[</span><span class="nx">pivotIdx</span><span class="o">+</span><span class="mi">1</span><span class="p">:])</span>
-</span><span class='line'>    <span class="k">return</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td><td class="code"><pre><code class="go"><span class="line"><span class="kd">func</span> <span class="nx">Qsort</span><span class="p">(</span><span class="nx">s</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="p">{</span>
+</span><span class="line">        <span class="k">return</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">    <span class="nx">pivotIdx</span> <span class="o">:=</span> <span class="nx">partition</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
+</span><span class="line">    <span class="nx">Qsort</span><span class="p">(</span><span class="nx">s</span><span class="p">[:</span><span class="nx">pivotIdx</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+</span><span class="line">    <span class="nx">Qsort</span><span class="p">(</span><span class="nx">s</span><span class="p">[</span><span class="nx">pivotIdx</span><span class="o">+</span><span class="mi">1</span><span class="p">:])</span>
+</span><span class="line">    <span class="k">return</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>Since the divide and conquer nature of quicksort means the recursive calls to
-Qsort don&rsquo;t touch the same memory, this should be a decent candidate for
+Qsort don’t touch the same memory, this should be a decent candidate for
 concurrency.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-</pre></td><td class='code'><pre><code class='go'><span class='line'><span class="kd">func</span> <span class="nx">Cqsort</span><span class="p">(</span><span class="nx">s</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">d</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">int</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">go</span> <span class="nx">cqsort</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span> <span class="nx">d</span><span class="p">)</span>
-</span><span class='line'>    <span class="o">&lt;-</span><span class="nx">d</span>
-</span><span class='line'>    <span class="k">return</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="kd">func</span> <span class="nx">cqsort</span><span class="p">(</span><span class="nx">s</span> <span class="p">[]</span><span class="kt">int</span><span class="p">,</span> <span class="nx">done</span> <span class="kd">chan</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="c1">// termination condition</span>
-</span><span class='line'>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">done</span> <span class="o">&lt;-</span> <span class="mi">1</span>
-</span><span class='line'>        <span class="k">return</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="c1">// where the work happens</span>
-</span><span class='line'>    <span class="nx">pivotIdx</span> <span class="o">:=</span> <span class="nx">partition</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c1">// communication channel</span>
-</span><span class='line'>    <span class="nx">childChan</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">int</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">go</span> <span class="nx">cqsort</span><span class="p">(</span><span class="nx">s</span><span class="p">[:</span><span class="nx">pivotIdx</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="nx">childChan</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">go</span> <span class="nx">cqsort</span><span class="p">(</span><span class="nx">s</span><span class="p">[</span><span class="nx">pivotIdx</span><span class="o">+</span><span class="mi">1</span><span class="p">:],</span> <span class="nx">childChan</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c1">// block until both concurrent children finish</span>
-</span><span class='line'>    <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">2</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
-</span><span class='line'>        <span class="o">&lt;-</span><span class="nx">childChan</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="c1">// tell our caller we are done</span>
-</span><span class='line'>    <span class="nx">done</span> <span class="o">&lt;-</span> <span class="mi">1</span>
-</span><span class='line'>    <span class="k">return</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+</pre></td><td class="code"><pre><code class="go"><span class="line"><span class="kd">func</span> <span class="nx">Cqsort</span><span class="p">(</span><span class="nx">s</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">    <span class="nx">d</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">int</span><span class="p">)</span>
+</span><span class="line">    <span class="k">go</span> <span class="nx">cqsort</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span> <span class="nx">d</span><span class="p">)</span>
+</span><span class="line">    <span class="o">&lt;-</span><span class="nx">d</span>
+</span><span class="line">    <span class="k">return</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line">
+</span><span class="line"><span class="kd">func</span> <span class="nx">cqsort</span><span class="p">(</span><span class="nx">s</span> <span class="p">[]</span><span class="kt">int</span><span class="p">,</span> <span class="nx">done</span> <span class="kd">chan</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">    <span class="c1">// termination condition</span>
+</span><span class="line">    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="p">{</span>
+</span><span class="line">        <span class="nx">done</span> <span class="o">&lt;-</span> <span class="mi">1</span>
+</span><span class="line">        <span class="k">return</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">    <span class="c1">// where the work happens</span>
+</span><span class="line">    <span class="nx">pivotIdx</span> <span class="o">:=</span> <span class="nx">partition</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">    <span class="c1">// communication channel</span>
+</span><span class="line">    <span class="nx">childChan</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">int</span><span class="p">)</span>
+</span><span class="line">    <span class="k">go</span> <span class="nx">cqsort</span><span class="p">(</span><span class="nx">s</span><span class="p">[:</span><span class="nx">pivotIdx</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="nx">childChan</span><span class="p">)</span>
+</span><span class="line">    <span class="k">go</span> <span class="nx">cqsort</span><span class="p">(</span><span class="nx">s</span><span class="p">[</span><span class="nx">pivotIdx</span><span class="o">+</span><span class="mi">1</span><span class="p">:],</span> <span class="nx">childChan</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">    <span class="c1">// block until both concurrent children finish</span>
+</span><span class="line">    <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">2</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+</span><span class="line">        <span class="o">&lt;-</span><span class="nx">childChan</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">    <span class="c1">// tell our caller we are done</span>
+</span><span class="line">    <span class="nx">done</span> <span class="o">&lt;-</span> <span class="mi">1</span>
+</span><span class="line">    <span class="k">return</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>This works but is incredibly slow. Goroutines are cheap but not free. For large
 s this program spends most of its time in garbage collection as too many
@@ -195,123 +220,124 @@ goroutines are created.</p>
 
 <p>We need to limit the number of goroutines.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-</pre></td><td class='code'><pre><code class='go'><span class='line'><span class="kd">func</span> <span class="nx">Cqsort</span><span class="p">(</span><span class="nx">s</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="p">{</span>
-</span><span class='line'>      <span class="k">return</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="nx">workers</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">MAXGOROUTINES</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="p">(</span><span class="nx">MAXGOROUTINES</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
-</span><span class='line'>      <span class="nx">workers</span> <span class="o">&lt;-</span> <span class="mi">1</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="nx">cqsort</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">workers</span><span class="p">)</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="kd">func</span> <span class="nx">cqsort</span><span class="p">(</span><span class="nx">s</span> <span class="p">[]</span><span class="kt">int</span><span class="p">,</span> <span class="nx">done</span> <span class="kd">chan</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">workers</span> <span class="kd">chan</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="c1">// report to caller that we&#39;re finished</span>
-</span><span class='line'>  <span class="k">if</span> <span class="nx">done</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span><span class='line'>      <span class="k">defer</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span> <span class="nx">done</span> <span class="o">&lt;-</span> <span class="mi">1</span> <span class="p">}()</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="p">{</span>
-</span><span class='line'>      <span class="k">return</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="c1">// since we may use the doneChannel synchronously</span>
-</span><span class='line'>  <span class="c1">// we need to buffer it so the synchronous code will</span>
-</span><span class='line'>  <span class="c1">// continue executing and not block waiting for a read</span>
-</span><span class='line'>  <span class="nx">doneChannel</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">int</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nx">pivotIdx</span> <span class="o">:=</span> <span class="nx">partition</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">select</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">case</span> <span class="o">&lt;-</span><span class="nx">workers</span><span class="p">:</span>
-</span><span class='line'>      <span class="c1">// if we have spare workers, use a goroutine</span>
-</span><span class='line'>      <span class="c1">// for parallelization</span>
-</span><span class='line'>      <span class="k">go</span> <span class="nx">cqsort</span><span class="p">(</span><span class="nx">s</span><span class="p">[:</span><span class="nx">pivotIdx</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="nx">doneChannel</span><span class="p">,</span> <span class="nx">workers</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">default</span><span class="p">:</span>
-</span><span class='line'>      <span class="c1">// if no spare workers, sort synchronously</span>
-</span><span class='line'>      <span class="nx">cqsort</span><span class="p">(</span><span class="nx">s</span><span class="p">[:</span><span class="nx">pivotIdx</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">workers</span><span class="p">)</span>
-</span><span class='line'>      <span class="c1">// calling this here as opposed to using the defer</span>
-</span><span class='line'>      <span class="nx">doneChannel</span> <span class="o">&lt;-</span> <span class="mi">1</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="c1">// use the existing goroutine to sort above the pivot</span>
-</span><span class='line'>  <span class="nx">cqsort</span><span class="p">(</span><span class="nx">s</span><span class="p">[</span><span class="nx">pivotIdx</span><span class="o">+</span><span class="mi">1</span><span class="p">:],</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">workers</span><span class="p">)</span>
-</span><span class='line'>  <span class="c1">// if we used a goroutine we&#39;ll need to wait for</span>
-</span><span class='line'>  <span class="c1">// the async signal on this channel, if not there</span>
-</span><span class='line'>  <span class="c1">// will already be a value in the channel and it shouldn&#39;t block</span>
-</span><span class='line'>  <span class="o">&lt;-</span><span class="nx">doneChannel</span>
-</span><span class='line'>  <span class="k">return</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+</pre></td><td class="code"><pre><code class="go"><span class="line"><span class="kd">func</span> <span class="nx">Cqsort</span><span class="p">(</span><span class="nx">s</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="p">{</span>
+</span><span class="line">		<span class="k">return</span>
+</span><span class="line">	<span class="p">}</span>
+</span><span class="line">	<span class="nx">workers</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">MAXGOROUTINES</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class="line">	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="p">(</span><span class="nx">MAXGOROUTINES</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+</span><span class="line">		<span class="nx">workers</span> <span class="o">&lt;-</span> <span class="mi">1</span>
+</span><span class="line">	<span class="p">}</span>
+</span><span class="line">	<span class="nx">cqsort</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">workers</span><span class="p">)</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line">
+</span><span class="line"><span class="kd">func</span> <span class="nx">cqsort</span><span class="p">(</span><span class="nx">s</span> <span class="p">[]</span><span class="kt">int</span><span class="p">,</span> <span class="nx">done</span> <span class="kd">chan</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">workers</span> <span class="kd">chan</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">	<span class="c1">// report to caller that we&#39;re finished</span>
+</span><span class="line">	<span class="k">if</span> <span class="nx">done</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span><span class="line">		<span class="k">defer</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span> <span class="nx">done</span> <span class="o">&lt;-</span> <span class="mi">1</span> <span class="p">}()</span>
+</span><span class="line">	<span class="p">}</span>
+</span><span class="line">
+</span><span class="line">	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="p">{</span>
+</span><span class="line">		<span class="k">return</span>
+</span><span class="line">	<span class="p">}</span>
+</span><span class="line">	<span class="c1">// since we may use the doneChannel synchronously</span>
+</span><span class="line">	<span class="c1">// we need to buffer it so the synchronous code will</span>
+</span><span class="line">	<span class="c1">// continue executing and not block waiting for a read</span>
+</span><span class="line">	<span class="nx">doneChannel</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">int</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">	<span class="nx">pivotIdx</span> <span class="o">:=</span> <span class="nx">partition</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">	<span class="k">select</span> <span class="p">{</span>
+</span><span class="line">	<span class="k">case</span> <span class="o">&lt;-</span><span class="nx">workers</span><span class="p">:</span>
+</span><span class="line">		<span class="c1">// if we have spare workers, use a goroutine</span>
+</span><span class="line">		<span class="c1">// for parallelization</span>
+</span><span class="line">		<span class="k">go</span> <span class="nx">cqsort</span><span class="p">(</span><span class="nx">s</span><span class="p">[:</span><span class="nx">pivotIdx</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="nx">doneChannel</span><span class="p">,</span> <span class="nx">workers</span><span class="p">)</span>
+</span><span class="line">	<span class="k">default</span><span class="p">:</span>
+</span><span class="line">		<span class="c1">// if no spare workers, sort synchronously</span>
+</span><span class="line">		<span class="nx">cqsort</span><span class="p">(</span><span class="nx">s</span><span class="p">[:</span><span class="nx">pivotIdx</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">workers</span><span class="p">)</span>
+</span><span class="line">		<span class="c1">// calling this here as opposed to using the defer</span>
+</span><span class="line">		<span class="nx">doneChannel</span> <span class="o">&lt;-</span> <span class="mi">1</span>
+</span><span class="line">	<span class="p">}</span>
+</span><span class="line">	<span class="c1">// use the existing goroutine to sort above the pivot</span>
+</span><span class="line">	<span class="nx">cqsort</span><span class="p">(</span><span class="nx">s</span><span class="p">[</span><span class="nx">pivotIdx</span><span class="o">+</span><span class="mi">1</span><span class="p">:],</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">workers</span><span class="p">)</span>
+</span><span class="line">	<span class="c1">// if we used a goroutine we&#39;ll need to wait for</span>
+</span><span class="line">	<span class="c1">// the async signal on this channel, if not there</span>
+</span><span class="line">	<span class="c1">// will already be a value in the channel and it shouldn&#39;t block</span>
+</span><span class="line">	<span class="o">&lt;-</span><span class="nx">doneChannel</span>
+</span><span class="line">	<span class="k">return</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>Setting MAXGOROUTINES limits the number of goroutines that ever get created by
 switching to a synchronous model once the workers channel is exhausted.</p>
 
 <p>This performs much better than before. Benchmarking puts it at about the same
 speed as the built-in sort.Ints, but still slower than our basic Qsort
-implementation for a shuffled slice of 10 million elements created by
+implementation for a shuffled slice of 1 million elements created by
 math/rand.Perm. Playing around with MAXGOROUTINES I seemed to get slight
 variations when using numbers anywhere from 2 to 10000 (make sure you have the
 GOMAXPROCS environment variable set to the number of cores you want to use
 so that goroutines are executed in parallel). Above 10000 and performance starts
 to degrade.</p>
 
-<p>This use of Go&rsquo;s concurrency features purely for the purpose of parallelizing
-code goes against Rob Pike&rsquo;s &ldquo;Concurrency is not Parallelism&rdquo; talk, so I&rsquo;m not
-surprised that I don&rsquo;t see a significant speedup when trying to parallelize this
-concurrent code against the sequential version. I am surprised that I don&rsquo;t get
+<p>This use of Go’s concurrency features purely for the purpose of parallelizing
+code goes against Rob Pike’s “Concurrency is not Parallelism” talk, so I’m not
+surprised that I don’t see a significant speedup when trying to parallelize this
+concurrent code against the sequential version. I am surprised that I don’t get
 similar speeds to the sequential version when setting MAXGOROUTINES to 1 as the
 code is essentially executing sequentially in this case. Perhaps the few extra
 statements and branches are enough to slow things down considerably. In any case
 it was a good experiment in writing concurrent Go that also forced me to dive
-into profiling with pprof and using Go&rsquo;s support for writing benchmarks in test
+into profiling with pprof and using Go’s support for writing benchmarks in test
 code.</p>
+
+<p>Code is all up on github at (https://github.com/azundo/cqsort).</p>
 </div>
 
 
@@ -337,6 +363,12 @@ code.</p>
 <time datetime="2013-06-23T22:05:00-04:00" pubdate data-updated="true">Jun 23<span>rd</span>, 2013</time>
       
 
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/concurrency/'>concurrency</a>, <a class='category' href='/blog/categories/go/'>go</a>
+  
+</span>
+
 
     </p>
     
@@ -354,6 +386,8 @@ code.</p>
         <a class="basic-alignment left" href="/blog/introducing-the-azundo-blog/" title="Previous Post: Introducing the Azundo Blog">&laquo; Introducing the Azundo Blog</a>
       
       
+        <a class="basic-alignment right" href="/blog/concurrent-qsort-in-go-part-ii/" title="Next Post: Concurrent Qsort in Go - Part II">Concurrent Qsort in Go - Part II &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -365,6 +399,10 @@ code.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/concurrent-qsort-in-go-part-ii/">Concurrent Qsort in Go - Part II</a>
+      </li>
     
       <li class="post">
         <a href="/blog/concurrent-quicksort-in-go/">Concurrent Quicksort in Go</a>

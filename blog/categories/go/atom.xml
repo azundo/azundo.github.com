@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: go | Azundo Design]]></title>
+  <link href="http://azundo.github.io/blog/categories/go/atom.xml" rel="self"/>
+  <link href="http://azundo.github.io/"/>
+  <updated>2013-07-05T00:57:22-04:00</updated>
+  <id>http://azundo.github.io/</id>
+  <author>
+    <name><![CDATA[Ben Best]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Concurrent Qsort in Go - Part II]]></title>
+    <link href="http://azundo.github.io/blog/concurrent-qsort-in-go-part-ii/"/>
+    <updated>2013-06-25T13:46:00-04:00</updated>
+    <id>http://azundo.github.io/blog/concurrent-qsort-in-go-part-ii</id>
+    <content type="html"><![CDATA[<p>After my <a href="https://azundo.github.io/blog/concurrent-quicksort-in-go">past
+attempt</a> at writing a
+concurrent Qsort algorithm I had a few more thoughts about how to change the
+architecture.</p>
+
+<p>Instead of creating new channels to pass to every recursively-called goroutine
+and then blocking on them until they return, I wanted to create only a single
+channel for communication and find a way to return from goroutines immediately.
+The solution I came up with is to send back the integer value of the number of
+elements in their sorted position when a goroutine returns. In the naive case,
+this is when the list is 0 or 1 elements long, leaving this fairly simple code.</p>
+
+<p>```go</p>
+
+<p>func Cqsort2(s []int) {
+    // this channel will collect the number of sorted elements
+	returnChannel := make(chan int)
+	go cqsort2(s, returnChannel)
+    // sum up the number of sorted elements until they equal
+    // the length of our original slice
+	for sortedElements := 0; sortedElements &lt; len(s); {
+		sortedElements += &lt;-returnChannel
+	}
+	return
+}</p>
+
+<p>func cqsort2(s []int, done chan int) {
+	if len(s) &lt;= 1 {
+	    // report the number of sorted elements to the
+        // communication channel
+		done &lt;-len(s)
+		return
+	}</p>
+
+<pre><code>pivotIdx := partition(s)
+
+go cqsort2(s[:pivotIdx+1], done)
+go cqsort2(s[pivotIdx+1:], done)
+// this goroutine should now return immediately and
+// doesn't have to block on the child calls
+return } ```
+</code></pre>
+
+<p>This still creates too many goroutines and uses too much memory. So taking a
+page from most quicksort implementations, lets use a selection sort for the last
+few elements. Empirically I found a value of about 75 to be ok. Our overall
+architecture doesn’t have to change, just add the selection sort call in the
+termination condition of our qsort2 function.</p>
+
+<p>```go</p>
+
+<p>func cqsort2(s []int, done chan int) {
+	if len(s) &lt;= 75 {
+        // run a selection sort when s is small
+        selectionSort(s)
+	    // report the number of sorted elements to the
+        // communication channel
+		done &lt;-len(s)
+		return
+	}</p>
+
+<pre><code>pivotIdx := partition(s)
+
+go cqsort2(s[:pivotIdx+1], done)
+go cqsort2(s[pivotIdx+1:], done)
+// this goroutine should now return immediately and
+// doesn't have to block on the child calls
+return } ```
+</code></pre>
+
+<p>Finally when using GOMAXPROCS=2 I got a better running time for the concurrent
+version over the non-concurrent Qsort from my last post. This isn’t quite a fair
+comparison though because I wasn’t using the selectionSort trick in Qsort.
+Adding it in to Qsort and our previous Cqsort brings all three implementations
+to about 7s to sort 1 milllion elements. So still no improvements over a
+sequential implementation despite using both of my cores at 100% in the
+concurrent cases. Memory and communication overhead still provide too much of a
+slow down.  I’m hoping to get my hands on a computer with 4 cores to see if the
+concurrent version will see a speedup when doubling the core count again, or if
+communication overhead is still too high.</p>
+
+<p>Again, all of the code and some benchmarking is in a github repository at
+(https://github.com/azundo/cqsort.git).</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Concurrent quicksort in Go]]></title>
+    <link href="http://azundo.github.io/blog/concurrent-quicksort-in-go/"/>
+    <updated>2013-06-23T22:05:00-04:00</updated>
+    <id>http://azundo.github.io/blog/concurrent-quicksort-in-go</id>
+    <content type="html"><![CDATA[<p>I’ve been playing around with Go to get some experience in a systems programming
+language before applying for applying jobs. I’ve never done concurrent/parallel
+programming so I thought I’d try to learn about some of Go’s concurrency tools
+by implementing quicksort concurrently.</p>
+
+<p>I started by writing a simple in-place quicksort implementation. The majority of
+the algorithm happens in a <code>partition</code> function which picks a random pivot and
+then does in-place swapping to partition around the pivot. With this in place
+the sequential algorithm falls into place easily.</p>
+
+<p><code>go
+func Qsort(s []int) {
+    if len(s) &lt;= 1 {
+        return
+    }
+    pivotIdx := partition(s)
+    Qsort(s[:pivotIdx+1])
+    Qsort(s[pivotIdx+1:])
+    return
+}
+</code></p>
+
+<p>Since the divide and conquer nature of quicksort means the recursive calls to
+Qsort don’t touch the same memory, this should be a decent candidate for
+concurrency.</p>
+
+<p>```go
+func Cqsort(s []int) {
+    d := make(chan int)
+    go cqsort(s, d)
+    &lt;-d
+    return
+}</p>
+
+<p>func cqsort(s []int, done chan int) {
+    // termination condition
+    if len(s) &lt;= 1 {
+        done &lt;- 1
+        return
+    }
+    // where the work happens
+    pivotIdx := partition(s)</p>
+
+<pre><code>// communication channel
+childChan := make(chan int)
+go cqsort(s[:pivotIdx+1], childChan)
+go cqsort(s[pivotIdx+1:], childChan)
+
+// block until both concurrent children finish
+for i := 0; i &lt; 2; i++ {
+    &lt;-childChan
+}
+// tell our caller we are done
+done &lt;- 1
+return } ```
+</code></pre>
+
+<p>This works but is incredibly slow. Goroutines are cheap but not free. For large
+s this program spends most of its time in garbage collection as too many
+goroutines are created.</p>
+
+<p>We need to limit the number of goroutines.</p>
+
+<p>```go
+func Cqsort(s []int) {
+	if len(s) &lt;= 1 {
+		return
+	}
+	workers := make(chan int, MAXGOROUTINES - 1)
+	for i := 0; i &lt; (MAXGOROUTINES-1); i++ {
+		workers &lt;- 1
+	}
+	cqsort(s, nil, workers)
+}</p>
+
+<p>func cqsort(s []int, done chan int, workers chan int) {
+	// report to caller that we’re finished
+	if done != nil {
+		defer func() { done &lt;- 1 }()
+	}</p>
+
+<pre><code>if len(s) &lt;= 1 {
+	return
+}
+// since we may use the doneChannel synchronously
+// we need to buffer it so the synchronous code will
+// continue executing and not block waiting for a read
+doneChannel := make(chan int, 1)
+
+pivotIdx := partition(s)
+
+select {
+case &lt;-workers:
+	// if we have spare workers, use a goroutine
+	// for parallelization
+	go cqsort(s[:pivotIdx+1], doneChannel, workers)
+default:
+	// if no spare workers, sort synchronously
+	cqsort(s[:pivotIdx+1], nil, workers)
+	// calling this here as opposed to using the defer
+	doneChannel &lt;- 1
+}
+// use the existing goroutine to sort above the pivot
+cqsort(s[pivotIdx+1:], nil, workers)
+// if we used a goroutine we'll need to wait for
+// the async signal on this channel, if not there
+// will already be a value in the channel and it shouldn't block
+&lt;-doneChannel
+return } ```
+</code></pre>
+
+<p>Setting MAXGOROUTINES limits the number of goroutines that ever get created by
+switching to a synchronous model once the workers channel is exhausted.</p>
+
+<p>This performs much better than before. Benchmarking puts it at about the same
+speed as the built-in sort.Ints, but still slower than our basic Qsort
+implementation for a shuffled slice of 1 million elements created by
+math/rand.Perm. Playing around with MAXGOROUTINES I seemed to get slight
+variations when using numbers anywhere from 2 to 10000 (make sure you have the
+GOMAXPROCS environment variable set to the number of cores you want to use
+so that goroutines are executed in parallel). Above 10000 and performance starts
+to degrade.</p>
+
+<p>This use of Go’s concurrency features purely for the purpose of parallelizing
+code goes against Rob Pike’s “Concurrency is not Parallelism” talk, so I’m not
+surprised that I don’t see a significant speedup when trying to parallelize this
+concurrent code against the sequential version. I am surprised that I don’t get
+similar speeds to the sequential version when setting MAXGOROUTINES to 1 as the
+code is essentially executing sequentially in this case. Perhaps the few extra
+statements and branches are enough to slow things down considerably. In any case
+it was a good experiment in writing concurrent Go that also forced me to dive
+into profiling with pprof and using Go’s support for writing benchmarks in test
+code.</p>
+
+<p>Code is all up on github at (https://github.com/azundo/cqsort).</p>
+]]></content>
+  </entry>
+  
+</feed>
