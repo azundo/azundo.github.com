@@ -4,7 +4,7 @@
   <title><![CDATA[Azundo Design]]></title>
   <link href="http://azundo.github.io/atom.xml" rel="self"/>
   <link href="http://azundo.github.io/"/>
-  <updated>2013-07-05T01:00:55-04:00</updated>
+  <updated>2013-07-05T01:03:13-04:00</updated>
   <id>http://azundo.github.io/</id>
   <author>
     <name><![CDATA[Ben Best]]></name>
@@ -1494,8 +1494,7 @@ their svg icon sets. Here are the attributions:</p>
     <link href="http://azundo.github.io/blog/concurrent-qsort-in-go-part-ii/"/>
     <updated>2013-06-25T13:46:00-04:00</updated>
     <id>http://azundo.github.io/blog/concurrent-qsort-in-go-part-ii</id>
-    <content type="html"><![CDATA[<p>After my <a href="https://azundo.github.io/blog/concurrent-quicksort-in-go">past
-attempt</a> at writing a
+    <content type="html"><![CDATA[<p>After my <a href="https://azundo.github.io/blog/concurrent-quicksort-in-go">past attempt</a> at writing a
 concurrent Qsort algorithm I had a few more thoughts about how to change the
 architecture.</p>
 
@@ -1620,7 +1619,7 @@ concurrent version will see a speedup when doubling the core count again, or if
 communication overhead is still too high.</p>
 
 <p>Again, all of the code and some benchmarking is in a github repository at
-(https://github.com/azundo/cqsort.git).</p>
+<a href="https://github.com/azundo/cqsort.git">https://github.com/azundo/cqsort.git</a>.</p>
 ]]></content>
   </entry>
   
