@@ -44,14 +44,19 @@ left or right randomly, but we would never be sure that our strategy is fool
 proof. Can we make sure our fox plays hard to get if we don't even know how
 to catch it? Turns out we can. Try out the demo of my solution and see if you
 can both figure out how to catch the fox and understand why a strategy works.
-Read on below for implementation details of the demo.
+Implementation details are below the demo and code is at 
+[https://gist.github.com/azundo/5941503](https://gist.github.com/azundo/5941503).
 
 
-<div id="fox"></div>
+###Instructions
 
     Click on a hole to select it for inspection. You win if the fox has nowhere
     left to hide. If you give up, click the button and one possible path the fox
     could have taken to avoid your inspections will be shown.
+
+
+<div id="fox"></div>
+
 
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script type="text/javascript">
@@ -83,7 +88,7 @@ Read on below for implementation details of the demo.
    * bit easier to follow and less accessible bit manipulation.
    */
 
-  ADJACENCY_MATRIX = [
+  ADJACENCY_LIST = [
     // hole 0 is next to hole 1
     [1],
     // hole 1 is next to hole 0 and hole 2
@@ -106,8 +111,8 @@ Read on below for implementation details of the demo.
       // any value in our pastState represents a hole that the fox was possibly in yesterday
       possiblePastHole = pastState[i];
 
-      // look up holes next to the possiblePastHole in our ADJACENCY_MATRIX
-      possibleNextHoles = ADJACENCY_MATRIX[possiblePastHole];
+      // look up holes next to the possiblePastHole in our ADJACENCY_LIST
+      possibleNextHoles = ADJACENCY_LIST[possiblePastHole];
       for (j = 0; j < possibleNextHoles.length; j++) {
         // any holes that are ajacent to a possible hole from the pastState
         // are valid holes for the fox in the next state, provided that hole wasn't inspected.
@@ -140,7 +145,7 @@ Read on below for implementation details of the demo.
       // since our 'graph' is not directed, we can safely use
       // the same adjacency values to move backwards through
       // the state list
-      possibleHoles = ADJACENCY_MATRIX[seq[0]];
+      possibleHoles = ADJACENCY_LIST[seq[0]];
       for (i = 0; i < possibleHoles.length; i++) {
         possibleHole = possibleHoles[i];
         // if the possible hole is in our stateToDetermine, use it.
@@ -202,6 +207,9 @@ Read on below for implementation details of the demo.
 
     // draw in row with our selection
     drawHoles(currentDay, currentDay, selection);
+
+    // fill in 'missed' label
+    labelMissed(currentDay, selection);
 
     // increase our day counter
     currentDay += 1;
@@ -316,6 +324,14 @@ Read on below for implementation details of the demo.
       .classed('selected', false);
   }
 
+  function labelMissed(row, selection) {
+    d3.select("#fox-holes-" + row)
+      .append('text')
+      .text('Missed!')
+      .attr('x', (selection+1) * xOffset - foxHoleR / 2 )
+      .attr('y', foxHoleR / 3);
+  }
+
 })();
 </script>
 
@@ -348,11 +364,21 @@ transitions. How do we decide which state we move to next? In our case our next
 state is dependent on two things, our previous state (the set of possible holes
 the fox could have been in yesterday) and our selection of which hole to check.
 
-To start lets forget about the action of checking a hole. How can we determine what holes the fox can be in based on what holes it could have been in yesterday? We'll use a very simple graph to determine this. Each hole is node, and it is connected by an edge to its adjacent holes. The first and last holes only have one adjacent hole while the others have two. We can represent our simple graph as an ajacency matrix:
+To start let's forget about the action of checking a hole. How can we determine
+what holes the fox can be in based on what holes it could have been in
+yesterday? If it was possible for the fox to be in hole `i` yesterday, then it
+is possible for the fox to be in any hole beside `i` today. If we iterate over
+all of the holes that the fox could have been in yesterday then we'll get the
+set of holes it could be in today.
+
+We'll use a very simple adjacency list to make our lives easy. If we access
+element `i` of the adjacency list we will get back an array containing all of
+the holes next to `i`.
+
 
 
 ```javascript
-var ADJACENCY_MATRIX = [
+var ADJACENCY_LIST = [
     // hole 0 is next to hole 1
     [1],
     // hole 1 is next to hole 0 and hole 2
@@ -364,7 +390,12 @@ var ADJACENCY_MATRIX = [
 ];
 ```
 
-Accessing element `0` of our `ADJACENCY_MATRIX` tells us which holes are next
+This adjacency list defines a very simple
+[graph](https://en.wikipedia.org/wiki/Graph_(mathematics)) where each hole is node, and
+it is connected by an edge to each of its adjacent holes. The first and last
+holes only have one adjacent hole while the others have two.
+
+Accessing element `0` of our `ADJACENCY_LIST` tells us which holes are next
 to hole `0`. If we want to know the set of possible future holes, we take the
 set of possible past holes and add all of the adjacent holes. Simple enough.
 
@@ -374,22 +405,27 @@ get caught if he ended up there. Hence, our transition function looks like this:
 ```javascript
   function nextState(pastState, guess) {
     /*
-     * Calculates our next state based on the past state and the next hole to be inspected.
+     * Calculates our next state based on the past state and
+     * the next hole to be inspected.
      */
     var next = [], i, j, possiblePastHole, possibleNextHoles, possibleNextHole;
     for (i = 0; i < pastState.length; i++) {
-      // any value in our pastState represents a hole that the fox was possibly in yesterday
+      // any value in our pastState represents a hole that
+      // the fox was possibly in yesterday
       possiblePastHole = pastState[i];
 
-      // look up holes next to the possiblePastHole in our ADJACENCY_MATRIX
-      possibleNextHoles = ADJACENCY_MATRIX[possiblePastHole];
+      // look up holes next to the possiblePastHole in our ADJACENCY_LIST
+      possibleNextHoles = ADJACENCY_LIST[possiblePastHole];
       for (j = 0; j < possibleNextHoles.length; j++) {
-        // any holes that are ajacent to a possible hole from the pastState
-        // are valid holes for the fox in the next state, provided that hole wasn't inspected.
-        // Note that the fox cannot stay in the same hole, it has to move to an adjacent hole.
+        // any holes that are ajacent to a possible hole
+        // from the pastState are valid holes for the fox in
+        // the next state, provided that hole wasn't
+        // inspected.  Note that the fox cannot stay in the
+        // same hole, it has to move to an adjacent hole.
         possibleNextHole = possibleNextHoles[j]
-        // don't add holes that are already in the next state array since our
-        // state is the set of possible holes
+        // don't add holes that are already in the next
+        // state array since our state is the set of
+        // possible holes
         if (possibleNextHole !== guess && next.indexOf(possibleNextHole) === -1) {
           next.push(possibleNextHole);
         }
@@ -405,7 +441,7 @@ caught it at some point, no matter where it started and how it decided to move.
 ###Reconstructing the Fox's Moves
 
 If we save each state we reach, we can reconstruct a possible path the fox
-could have taken to get to the current state. Lets choose any arbitrary hole
+could have taken to get to the current state. Let's choose any arbitrary hole
 from the current state, and work backwards by looking for adjacent holes in the
 previous state. We are guaranteed to find a backwards path since every hole in
 our current state must be possible. Here is the code:
@@ -419,17 +455,19 @@ our current state must be possible. Here is the code:
       return seq;
     }
     finalState = stateHistory.pop();
-    // pick whatever hole happens to be listed first in the final state to end our sequence.
+    // pick whatever hole happens to be listed first in the
+    // final state to end our sequence.
     seq.unshift(finalState[0]);
-    // work backwards through the state history, picking a valid state from each 
-    // entry and unshifting it onto the front of the sequence
+    // work backwards through the state history, picking a
+    // valid state from each entry and unshifting it onto
+    // the front of the sequence
     while (stateHistory.length > 0) {
       stateToDetermine = stateHistory.pop();
-      // find a hole beside the hole at the front of our sequence
-      // since our 'graph' is not directed, we can safely use
-      // the same adjacency values to move backwards through
-      // the state list
-      possibleHoles = ADJACENCY_MATRIX[seq[0]];
+      // find a hole beside the hole at the front of our
+      // sequence since our 'graph' is not directed, we can
+      // safely use the same adjacency values to move
+      // backwards through the state list
+      possibleHoles = ADJACENCY_LIST[seq[0]];
       for (i = 0; i < possibleHoles.length; i++) {
         possibleHole = possibleHoles[i];
         // if the possible hole is in our stateToDetermine, use it.
@@ -444,11 +482,17 @@ our current state must be possible. Here is the code:
 ```
 
 ##Demo and Further Steps
+
 Throwing this together with some d3.js drawing and we get the demo from above.
-The full code is in a gist at XXX. You could also make solving the puzzle a bit
-easier if you showed all possible holes the fox could be in as you go along,
-instead of only showing one possible path at the end. Feel free to fork and
-implement this if you want to practice some basic d3 drawing.
+The full code is in a gist at
+[https://gist.github.com/azundo/5941503](https://gist.github.com/azundo/5941503)
+and viewable on [bl.ocks.org](http://bl.ocks.org) at
+[http://bl.ocks.org/azundo/5941503](http://bl.ocks.org/azundo/5941503).
+
+You could also make solving the puzzle a bit easier if you showed all possible
+holes the fox could be in as you go along, instead of only showing one possible
+path at the end. Feel free to fork and implement this if you want to practice
+some basic d3 drawing.
 
 Now can you catch the fox?
 
