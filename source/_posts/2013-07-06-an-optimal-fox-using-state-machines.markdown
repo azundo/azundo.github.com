@@ -44,7 +44,7 @@ left or right randomly, but we would never be sure that our strategy is fool
 proof. Can we make sure our fox plays hard to get if we don't even know how
 to catch it? Turns out we can. Try out the demo of my solution and see if you
 can both figure out how to catch the fox and understand why a strategy works.
-Implementation details are below the demo and code is at 
+Implementation details are below the demo. Code is at 
 [https://gist.github.com/azundo/5941503](https://gist.github.com/azundo/5941503).
 
 
@@ -347,16 +347,17 @@ the fox to choose, or a winning strategy.
 
 ###Our State Space
 Each state in our state space will consist of all of the possible holes the fox
-could be in at any one time. There are 5 holes and for each hole it is either
-possible for the fox to be in that hole, or impossible. This gives us a state
-space of size `2^5`. We could model this as a bit vector with 5 bits, but for
-clarity I will use a simple array. If it is possible for the fox to be in hole
-`i`, then our state array will contain `i`. We'll number our holes `0`, `1`,
-`2`, `3`, `4`.
+could be in at any one time. There are 5 holes and each hole has two states: it
+is either possible for the fox to be in that hole, or not possible. This gives
+us a state space of size `2^5 = 32`. We could model this as a bit vector with 5
+bits, but for clarity I will use a simple array. If it is possible for the fox
+to be in hole `i`, then our state array will contain `i`. We'll number our
+holes `0`, `1`, `2`, `3`, `4`.
 
 For example, before we check any holes, our state would be `[0, 1, 2, 3, 4]`.
 The fox could be in any hole. If we check hole `2`, then our state would move
-to `[0, 1, 3, 4]`.
+to `[0, 1, 3, 4]`. In the case where there is no possible hole for our fox to
+be in without catching him at some point, our state is an empty array `[]`.
 
 ###State Transitions
 The key implementation detail when using a state machine is our state
@@ -390,10 +391,11 @@ var ADJACENCY_LIST = [
 ];
 ```
 
-This adjacency list defines a very simple
-[graph](https://en.wikipedia.org/wiki/Graph_(mathematics)) where each hole is node, and
-it is connected by an edge to each of its adjacent holes. The first and last
-holes only have one adjacent hole while the others have two.
+This [adjacency list](http://en.wikipedia.org/wiki/Adjacency_list) defines a
+very simple [graph](https://en.wikipedia.org/wiki/Graph_(mathematics)) where
+each hole is a node connected by edges to each of its adjacent holes. The first
+and last holes only have one adjacent hole (and thus one edge) while the others
+have two.
 
 Accessing element `0` of our `ADJACENCY_LIST` tells us which holes are next
 to hole `0`. If we want to know the set of possible future holes, we take the
@@ -491,8 +493,8 @@ and viewable on [bl.ocks.org](http://bl.ocks.org) at
 
 You could also make solving the puzzle a bit easier if you showed all possible
 holes the fox could be in as you go along, instead of only showing one possible
-path at the end. Feel free to fork and implement this if you want to practice
-some basic d3 drawing.
+path at the end. Feel free to fork and implement this as a good exercise in d3
+basics.
 
 Now can you catch the fox?
 
