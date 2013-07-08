@@ -17,8 +17,12 @@
         <lastmod>2013-07-05T01:00:20-04:00</lastmod>
     </url>
     <url>
+        <loc>http://azundo.github.io/blog/an-optimal-fox-using-state-machines/</loc>
+        <lastmod>2013-07-08T12:58:26-04:00</lastmod>
+    </url>
+    <url>
         <loc>http://azundo.github.io/</loc>
-        <lastmod>2013-07-05T01:02:45-04:00</lastmod>
+        <lastmod>2013-07-08T12:58:26-04:00</lastmod>
     </url>
     <url>
         <loc>http://azundo.github.io/robots.txt</loc>
@@ -26,6 +30,6 @@
     </url>
     <url>
         <loc>http://azundo.github.io/blog/archives/</loc>
-        <lastmod>2013-07-05T01:02:45-04:00</lastmod>
+        <lastmod>2013-07-08T12:58:26-04:00</lastmod>
     </url>
 </urlset>
