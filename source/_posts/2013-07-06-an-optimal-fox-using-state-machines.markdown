@@ -4,7 +4,7 @@ title: "An Optimal Fox Using State Machines"
 date: 2013-07-05 16:34
 comments: true
 published: true
-categories: ["d3.js", "puzzles"]
+categories: ["d3.js", "puzzles", "state machines"]
 ---
 
 <style>
@@ -162,11 +162,10 @@ Implementation details are below the demo. Code is at
    * End of State Machine Functions
    */
 
-  function selectHole() {
-      // pull the hole number from the id. XXX should fix this
-      var selection = parseInt(d3.select(this).attr('id').split('-').pop());
+  function selectHole(selection) {
       // update state information
       state = nextState(state, selection);
+      stateHistory.push(state.slice());
       // if there are no possible holes for the fox to be in, we caught him!
       if (state.length === 0) {
         foxCaught(selection);
@@ -180,7 +179,9 @@ Implementation details are below the demo. Code is at
     // remove the selector
     selector.remove();
 
-    // our last state was where we caught the fox
+    // our last state was where we caught the fox, so remove the empty state
+    // and push on a state containing the selection that caught the fox.
+    stateHistory.pop();
     stateHistory.push([selection]);
 
     // draw the current selection
@@ -196,8 +197,6 @@ Implementation details are below the demo. Code is at
   }
 
   function advanceOneDay(selection) {
-    // update our stateHistory
-    stateHistory.push(state.slice());
 
     // increase size of container div and/or svg canvas
     updateCanvasSizes();
@@ -237,7 +236,11 @@ Implementation details are below the demo. Code is at
       .on('mouseout', function() {
         d3.select(this).classed('selected', false);
       })
-      .on('click', selectHole);
+      .on('click', function() {
+        // pull the hole number from the id. XXX pretty hacky
+        var selection = parseInt(d3.select(this).attr('id').split('-').pop());
+        selectHole(selection);
+      });
   };
 
 
@@ -437,8 +440,26 @@ get caught if he ended up there. Hence, our transition function looks like this:
   }
 ```
 
-If we ever end up with an empty state, the fox has no where to go. We must have
+If we ever end up with an empty state, the fox has nowhere to go. We must have
 caught it at some point, no matter where it started and how it decided to move.
+
+Every time we select a hole to inspect, we'll update our state and push a copy
+of it onto an array to keep track of what states we've been through in the
+past. We'll use that later.
+
+```javascript
+  function selectHole(selection) {
+      // update state information
+      state = nextState(state, selection);
+      stateHistory.push(state.slice());
+      // if there are no possible holes for the fox to be in, we caught him!
+      if (state.length === 0) {
+        foxCaught(selection);
+      } else {
+        advanceOneDay(selection);
+      }
+  }
+```
 
 ###Reconstructing the Fox's Moves
 
