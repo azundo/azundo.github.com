@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "An Optimal Fox Using State Machines"
+title: "An Optimal Fox AI Using State Machines"
 date: 2013-07-05 16:34
 comments: true
 published: true
