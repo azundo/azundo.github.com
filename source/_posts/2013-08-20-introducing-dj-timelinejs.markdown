@@ -3,7 +3,7 @@ layout: post
 title: "Introducing dj-timelinejs"
 date: 2013-08-20 15:37
 comments: true
-categories: 
+categories: [django,timelinejs]
 ---
 
 I've been working on packaging up some components from my work with Engineers
