@@ -4,7 +4,7 @@
   <title><![CDATA[Category: go | Azundo Design]]></title>
   <link href="http://azundo.github.io/blog/categories/go/atom.xml" rel="self"/>
   <link href="http://azundo.github.io/"/>
-  <updated>2013-07-08T12:59:17-04:00</updated>
+  <updated>2013-08-20T15:43:26-07:00</updated>
   <id>http://azundo.github.io/</id>
   <author>
     <name><![CDATA[Ben Best]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Concurrent Qsort in Go - Part II]]></title>
     <link href="http://azundo.github.io/blog/concurrent-qsort-in-go-part-ii/"/>
-    <updated>2013-06-25T13:46:00-04:00</updated>
+    <updated>2013-06-25T13:46:00-07:00</updated>
     <id>http://azundo.github.io/blog/concurrent-qsort-in-go-part-ii</id>
     <content type="html"><![CDATA[<p>After my <a href="https://azundo.github.io/blog/concurrent-quicksort-in-go">past attempt</a> at writing a
 concurrent Qsort algorithm I had a few more thoughts about how to change the
@@ -106,7 +106,7 @@ communication overhead is still too high.</p>
   <entry>
     <title type="html"><![CDATA[Concurrent quicksort in Go]]></title>
     <link href="http://azundo.github.io/blog/concurrent-quicksort-in-go/"/>
-    <updated>2013-06-23T22:05:00-04:00</updated>
+    <updated>2013-06-23T22:05:00-07:00</updated>
     <id>http://azundo.github.io/blog/concurrent-quicksort-in-go</id>
     <content type="html"><![CDATA[<p>I’ve been playing around with Go to get some experience in a systems programming
 language before applying for applying jobs. I’ve never done concurrent/parallel

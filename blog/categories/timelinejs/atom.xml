@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: timelinejs | Azundo Design]]></title>
+  <link href="http://azundo.github.io/blog/categories/timelinejs/atom.xml" rel="self"/>
+  <link href="http://azundo.github.io/"/>
+  <updated>2013-08-20T15:43:26-07:00</updated>
+  <id>http://azundo.github.io/</id>
+  <author>
+    <name><![CDATA[Ben Best]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Introducing dj-timelinejs]]></title>
+    <link href="http://azundo.github.io/blog/introducing-dj-timelinejs/"/>
+    <updated>2013-08-20T15:37:00-07:00</updated>
+    <id>http://azundo.github.io/blog/introducing-dj-timelinejs</id>
+    <content type="html"><![CDATA[<p>I’ve been working on packaging up some components from my work with Engineers
+Without Borders. One really great Knowledge Management Tool we use is buildling
+timelines with <a href="http://timeline.verite.co/">TimelineJS</a>. Our custom KM site is
+written in Django and wanted an easy way to integrate timelines with the site,
+so I created <a href="https://github.com/azundo/dj-timelinejs/">dj-timelinejs</a>.</p>
+
+<p>The package is pip-installable with <code>pip install dj-timelinejs</code> and provides
+admin-interface access to created timelines and a bunch of class-based views
+for viewing and importing existing timelines that you may have hosted in Google
+Spreadsheets. Documentation is in the
+<a href="https://github.com/azundo/dj-timelinejs/blob/master/README.md">README</a>.</p>
+]]></content>
+  </entry>
+  
+</feed>

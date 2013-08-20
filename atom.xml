@@ -4,7 +4,7 @@
   <title><![CDATA[Azundo Design]]></title>
   <link href="http://azundo.github.io/atom.xml" rel="self"/>
   <link href="http://azundo.github.io/"/>
-  <updated>2013-07-08T12:59:17-04:00</updated>
+  <updated>2013-08-20T15:43:26-07:00</updated>
   <id>http://azundo.github.io/</id>
   <author>
     <name><![CDATA[Ben Best]]></name>
@@ -14,9 +14,28 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Introducing dj-timelinejs]]></title>
+    <link href="http://azundo.github.io/blog/introducing-dj-timelinejs/"/>
+    <updated>2013-08-20T15:37:00-07:00</updated>
+    <id>http://azundo.github.io/blog/introducing-dj-timelinejs</id>
+    <content type="html"><![CDATA[<p>I’ve been working on packaging up some components from my work with Engineers
+Without Borders. One really great Knowledge Management Tool we use is buildling
+timelines with <a href="http://timeline.verite.co/">TimelineJS</a>. Our custom KM site is
+written in Django and wanted an easy way to integrate timelines with the site,
+so I created <a href="https://github.com/azundo/dj-timelinejs/">dj-timelinejs</a>.</p>
+
+<p>The package is pip-installable with <code>pip install dj-timelinejs</code> and provides
+admin-interface access to created timelines and a bunch of class-based views
+for viewing and importing existing timelines that you may have hosted in Google
+Spreadsheets. Documentation is in the
+<a href="https://github.com/azundo/dj-timelinejs/blob/master/README.md">README</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[An Optimal Fox AI Using State Machines]]></title>
     <link href="http://azundo.github.io/blog/an-optimal-fox-using-state-machines/"/>
-    <updated>2013-07-05T16:34:00-04:00</updated>
+    <updated>2013-07-05T16:34:00-07:00</updated>
     <id>http://azundo.github.io/blog/an-optimal-fox-using-state-machines</id>
     <content type="html"><![CDATA[<style>
     .fox-hole.selected {
@@ -615,7 +634,7 @@ basics.</p>
   <entry>
     <title type="html"><![CDATA[Using D3.js to Brute Force the Pirate Puzzle]]></title>
     <link href="http://azundo.github.io/blog/using-d3-dot-js-to-brute-force-the-pirate-puzzle/"/>
-    <updated>2013-07-04T23:10:00-04:00</updated>
+    <updated>2013-07-04T23:10:00-07:00</updated>
     <id>http://azundo.github.io/blog/using-d3-dot-js-to-brute-force-the-pirate-puzzle</id>
     <content type="html"><![CDATA[<style>
   .island {
@@ -2091,7 +2110,7 @@ their svg icon sets. Here are the attributions:</p>
   <entry>
     <title type="html"><![CDATA[Concurrent Qsort in Go - Part II]]></title>
     <link href="http://azundo.github.io/blog/concurrent-qsort-in-go-part-ii/"/>
-    <updated>2013-06-25T13:46:00-04:00</updated>
+    <updated>2013-06-25T13:46:00-07:00</updated>
     <id>http://azundo.github.io/blog/concurrent-qsort-in-go-part-ii</id>
     <content type="html"><![CDATA[<p>After my <a href="https://azundo.github.io/blog/concurrent-quicksort-in-go">past attempt</a> at writing a
 concurrent Qsort algorithm I had a few more thoughts about how to change the
@@ -2225,7 +2244,7 @@ communication overhead is still too high.</p>
   <entry>
     <title type="html"><![CDATA[Concurrent quicksort in Go]]></title>
     <link href="http://azundo.github.io/blog/concurrent-quicksort-in-go/"/>
-    <updated>2013-06-23T22:05:00-04:00</updated>
+    <updated>2013-06-23T22:05:00-07:00</updated>
     <id>http://azundo.github.io/blog/concurrent-quicksort-in-go</id>
     <content type="html"><![CDATA[<p>I’ve been playing around with Go to get some experience in a systems programming
 language before applying for applying jobs. I’ve never done concurrent/parallel
@@ -2451,7 +2470,7 @@ code.</p>
   <entry>
     <title type="html"><![CDATA[Introducing the Azundo Blog]]></title>
     <link href="http://azundo.github.io/blog/introducing-the-azundo-blog/"/>
-    <updated>2013-06-12T12:05:00-04:00</updated>
+    <updated>2013-06-12T12:05:00-07:00</updated>
     <id>http://azundo.github.io/blog/introducing-the-azundo-blog</id>
     <content type="html"><![CDATA[<p>A new day and a new blog. As I transition from my past role as a Market
 Development Specialist with Engineers Without Borders Canada toward a more

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: d3.js | Azundo Design]]></title>
   <link href="http://azundo.github.io/blog/categories/d3-dot-js/atom.xml" rel="self"/>
   <link href="http://azundo.github.io/"/>
-  <updated>2013-07-08T12:59:17-04:00</updated>
+  <updated>2013-08-20T15:43:26-07:00</updated>
   <id>http://azundo.github.io/</id>
   <author>
     <name><![CDATA[Ben Best]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[An Optimal Fox AI Using State Machines]]></title>
     <link href="http://azundo.github.io/blog/an-optimal-fox-using-state-machines/"/>
-    <updated>2013-07-05T16:34:00-04:00</updated>
+    <updated>2013-07-05T16:34:00-07:00</updated>
     <id>http://azundo.github.io/blog/an-optimal-fox-using-state-machines</id>
     <content type="html"><![CDATA[<style>
     .fox-hole.selected {
@@ -537,7 +537,7 @@ basics.</p>
   <entry>
     <title type="html"><![CDATA[Using D3.js to Brute Force the Pirate Puzzle]]></title>
     <link href="http://azundo.github.io/blog/using-d3-dot-js-to-brute-force-the-pirate-puzzle/"/>
-    <updated>2013-07-04T23:10:00-04:00</updated>
+    <updated>2013-07-04T23:10:00-07:00</updated>
     <id>http://azundo.github.io/blog/using-d3-dot-js-to-brute-force-the-pirate-puzzle</id>
     <content type="html"><![CDATA[<style>
   .island {
