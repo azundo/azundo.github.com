@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: backbone.js | Azundo Design]]></title>
+  <link href="http://azundo.github.io/blog/categories/backbone-dot-js/atom.xml" rel="self"/>
+  <link href="http://azundo.github.io/"/>
+  <updated>2013-08-20T16:22:18-07:00</updated>
+  <id>http://azundo.github.io/</id>
+  <author>
+    <name><![CDATA[Ben Best]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Introducing backbone-filtermodule]]></title>
+    <link href="http://azundo.github.io/blog/introducing-backbone-filtermodule/"/>
+    <updated>2013-08-20T15:58:00-07:00</updated>
+    <id>http://azundo.github.io/blog/introducing-backbone-filtermodule</id>
+    <content type="html"><![CDATA[<p>I packaged this up a couple of months ago but here is the official blog post
+for <a href="https://github.com/azundo/backbone-filtermodule">backbone-filtermodule</a>.
+Documentation is in the README and examples in the examples directory.</p>
+
+<p>The goal is to provide a view that nicely filters a collection based on
+multiple criteria and allows for animation. Originally I created this for the
+<a href="http://avc.azundo.com/people/">AVC Team Page</a>. You can see a simple example at
+<a href="http://azundo.github.io/backbone-filtermodule/examples/shapes.html">http://azundo.github.io/backbone-filtermodule/examples/shapes.html</a>.</p>
+]]></content>
+  </entry>
+  
+</feed>
